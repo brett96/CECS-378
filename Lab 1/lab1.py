@@ -67,6 +67,11 @@ def isWord(word, words, start, stop):  #Searches for word in dictionary using bi
 	else:
 		return False
 
+def getAllMatches(nDict, string):
+	indexes = [i for i, x in enumerate(nDict) if x == string]
+	return indexes
+
+
 
 def decrypt(string):
 	cArray = list(string)
@@ -94,8 +99,9 @@ def decrypt(string):
 			message += cArray[k]  # Add another char to the message and try again
 
 	cipherNum = convertToNum(string)
+
 	cipherNum = cipherNum.split(" ")
-	print(cipherNum)
+	#print(cipherNum)
 
 	# wordNumFile = open("wordNums.txt", "w")
 	# numFile = open("nums.txt", "w")
@@ -108,24 +114,44 @@ def decrypt(string):
 
 	
 	length = len(cipherNum) 
-	found = []
+	
+	possibleWord = ""
+	for i in range(0, len(cipherNum)):
+		#possibleWord = ""
+		possibleWord += cipherNum[i] + " "
+		matches = getAllMatches(nums, possibleWord) #[i for i, x in enumerate(nums) if x == possibleWord] # List of all words that match the current pattern
 
-
-	while length > 0:
-		word = ""
-		for c in range(0, length):
-			word += cipherNum[c] + " "
-			
-		indexes = [i for i, x in enumerate(nums) if x == word]
-		for index in indexes:
-			result = words[index]
+		# for each match, try finding a next word starting from the next character
+		for match in matches:
+			# print(words[match])
+			nextWordIdx = i + 1
 			nextWord = ""
-			for d in range(len(str(words[index])), len(cipherNum)):
-				nextWord += cipherNum[d]
-			nextIndexes = [j for j, y in enumerate(nums) if y == nextWord]
-			for idx in nextIndexes:
-				print(words[idx])
-		length -= 1
+			for j in range(nextWordIdx, len(cipherNum)):  # need to start new pattern from 1; currently starting next word w/ pattern history from previous word
+				nextWord += cipherNum[j] + " "
+				print(nextWord)
+				nextMatches = getAllMatches(nums, nextWord)  # List of all pattern matches for next word
+				for nextMatch in nextMatches:
+					print(words[match] + " " + words[nextMatch])
+
+# Redo
+	# while length > 0:
+	# 	word = ""
+	# 	for c in range(0, length):
+	# 		word += cipherNum[c] + " "
+			
+	# 	indexes = [i for i, x in enumerate(nums) if x == word] # List of all words that match the current pattern
+	# 	for index in indexes:  # Go through each item in list & use as possible word
+	# 		result = words[index]
+	# 		nextWord = ""
+	# 		for d in range(len(str(words[index])), len(cipherNum)):
+	# 			nextWord += cipherNum[d] + " "
+
+	# 		nextIndexes = [j for j, y in enumerate(nums) if y == nextWord]
+	# 		for idx in nextIndexes:
+	# 			print(words[idx])
+	# 	length -= 1
+# End redo
+
 
 	# while length > 0:
 	# 	word = ""
@@ -153,8 +179,8 @@ def decrypt(string):
 	# 		cpyLen -= 1
 	# 	length -= 1
 				
-	for item in found:
-		print(item)
+	# for item in found:
+	# 	print(item)
 
 	# length = len(cipherNum)
 	# for item in found:
@@ -298,3 +324,4 @@ if __name__ == '__main__':
 	done = input(" ")
 	if len(done) >= 0:
 		pass
+
