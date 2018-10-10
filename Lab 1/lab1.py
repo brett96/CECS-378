@@ -30,7 +30,7 @@ def encrypt(string, key):  # Key being used by me is "fpaijnewxtslkdyqzmhrgovbcu
 	result = ""
 	for char in cArray:
 		result += alphaMap[char]
-	print(result)
+	print("\n\nEncrypted message: " + result + "\n")
 
 
 def convertToNum(string):
@@ -128,7 +128,7 @@ def decrypt(string):
 			nextWord = ""
 			for j in range(nextWordIdx, len(cipherNum)):  # need to start new pattern from 1; currently starting next word w/ pattern history from previous word
 				nextWord += cipherNum[j] + " "
-				print(nextWord)
+				#print(nextWord)
 				nextMatches = getAllMatches(nums, nextWord)  # List of all pattern matches for next word
 				for nextMatch in nextMatches:
 					print(words[match] + " " + words[nextMatch])
@@ -296,32 +296,49 @@ def decrypt(string):
 
 if __name__ == '__main__':
 	key = "fpaijnewxtslkdyqzmhrgovbcu"  # Encryption key
-	print(convertToNum("ejitpspawaqlejitaiulrtwllrflrllaoatwsqqjatgackthlsiraoatwlplqjatwjufrhlhutsqataqitatsaittkstqfjcae"))
 
-	#decrypt("fqjcb rwjwj vnjax bnkhj whxcq nawjv nfxdu mbvnu ujbbf nnc")  # whatsinanamearosebyanyothernamewouldsmellassweet
+	done = False
+	while not done:
+		action = input("Enter 'E' to encrypt or 'D' to decrypt: ")
+		if action.lower() == 'e':
+			phrase = input("Enter the phrase to be encrypted: ")
+			key = input("Enter the key you would like to use: ")
+			encrypt(phrase, key)
+		elif action.lower() == 'd':
+			phrase = input("Enter the phrase to be decrypted: ")
+			decrypt(phrase)
+		else:
+			print("Invalid instruction.  Please try again")
 
-	#decrypt("oczmz vmzor jocdi bnojv dhvod igdaz admno ojbzo rcvot jprvi oviyv aozmo cvooj ziejt dojig toczr dnzno jahvi fdiyv xcdzq zoczn zxjiy")  # therearetwothingstoaimatinlifefirsttogetwhatyouwantandafterthattoenjoyitonlythewisestofmankindachievethesecond
-	# # print("\n\n")
+		choice = input("Would you like to encrypt or decrypt again? (Y/N): ")
+		if choice.lower() == 'y':
+			done = False
+		else:
+			done = True
 
-	decrypt("ejitp spawa qleji taiul rtwll rflrl laoat wsqqj atgac kthls iraoa twlpl qjatw jufrh lhuts qataq itats aittk stqfj cae")
+		#print(convertToNum("ejitpspawaqlejitaiulrtwllrflrllaoatwsqqjatgackthlsiraoatwlplqjatwjufrhlhutsqataqitatsaittkstqfjcae"))
 
-		# Most common = a; patterns: awa, aoa, ata, atsa, atga
-	# print("\n\n")
+		#decrypt("fqjcb rwjwj vnjax bnkhj whxcq nawjv nfxdu mbvnu ujbbf nnc")  # whatsinanamearosebyanyothernamewouldsmellassweet
 
-	# decrypt("iyhqz ewqin azqej shayz niqbe aheum hnmnj jaqii yuexq ayqkn jbeuq iihed yzhni ifnun sayiz yudhe")
-	# 	+ "sqshu qesqa iluym qkque aqaqm oejjs hqzyu jdzqa diesh niznj jayzy uiqhq vayzq shsnj jejjz nshna"
-	# 	+ "hnmyt isnae sqfun dqzew qiead zevqi zhnjq shqze udqai jrmtq uishq ifnun siiqa suoij qqfni syyle iszhn"
-	# 	+ "bhmei squih nimnx hsead shqmr udquq uaqeu iisqe jshnj oihyy snaxs hqihe lsilu ymhni tyz")
+		#decrypt("oczmz vmzor jocdi bnojv dhvod igdaz admno ojbzo rcvot jprvi oviyv aozmo cvooj ziejt dojig toczr dnzno jahvi fdiyv xcdzq zoczn zxjiy")  # therearetwothingstoaimatinlifefirsttogetwhatyouwantandafterthattoenjoyitonlythewisestofmankindachievethesecond
+		# # print("\n\n")
+
+		#decrypt("ejitp spawa qleji taiul rtwll rflrl laoat wsqqj atgac kthls iraoa twlpl qjatw jufrh lhuts qataq itats aittk stqfj cae")
+
+			# Most common = a; patterns: awa, aoa, ata, atsa, atga
+		# print("\n\n")
+
+		# decrypt("iyhqz ewqin azqej shayz niqbe aheum hnmnj jaqii yuexq ayqkn jbeuq iihed yzhni ifnun sayiz yudhe")
+		# 	+ "sqshu qesqa iluym qkque aqaqm oejjs hqzyu jdzqa diesh niznj jayzy uiqhq vayzq shsnj jejjz nshna"
+		# 	+ "hnmyt isnae sqfun dqzew qiead zevqi zhnjq shqze udqai jrmtq uishq ifnun siiqa suoij qqfni syyle iszhn"
+		# 	+ "bhmei squih nimnx hsead shqmr udquq uaqeu iisqe jshnj oihyy snaxs hqihe lsilu ymhni tyz")
 
 
-	# encrypt("He who fights with monsters should look to it that he himself does not become a monster. And if you"
-	# 	+ "gaze long into an abyss, the abyss also gazes into you", key)
+		# encrypt("He who fights with monsters should look to it that he himself does not become a monster. And if you"
+		# 	+ "gaze long into an abyss, the abyss also gazes into you", key)
 
-	# encrypt("There is a theory which states that if ever anybody discovers exactly what the Universe is for and why"
-	# 	+ "it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable."
-	# 	+ "There is another theory which states that this has already happened.", key)
+		# encrypt("There is a theory which states that if ever anybody discovers exactly what the Universe is for and why"
+		# 	+ "it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable."
+		# 	+ "There is another theory which states that this has already happened.", key)
 
-	done = input(" ")
-	if len(done) >= 0:
-		pass
 
